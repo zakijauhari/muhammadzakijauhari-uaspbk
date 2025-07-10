@@ -1,5 +1,5 @@
 # 🐱Tempat Teduh🐶
-Aplikasi yang dirancang sebagai sarana pengelolaan suatu tempat **Penitipan Hewan** berbasis digital. Tempat teduh dibanngun menggunakan **Vue 3**, **Pinia**, dan **Json Server** sebagai backend.
+Aplikasi yang dirancang sebagai sarana pengelolaan suatu tempat **Penitipan Hewan** berbasis digital. Tempat teduh dibangun menggunakan **Vue 3**, **Pinia**, dan **Json Server** sebagai backend.
 
 ---
 
@@ -21,38 +21,18 @@ Aplikasi yang dirancang sebagai sarana pengelolaan suatu tempat **Penitipan Hewa
 | `/`          | Dashboard     | Halaman utama  |
 | `/boarding`   | Penitipan Hewan       | Form penginputan data penitipan |
 | `/pickup`   | Pengambilan hewan     | Form penginputan data pengambilan  |
-| `/laporan`   | Laporan        | (Opsional) Halaman rekap transaksi, total pendapatan, dsb  |
-| `/laporan`   | Laporan        | (Opsional) Halaman rekap transaksi, total pendapatan, dsb  |
-
----
-
-## 🛠️ Store Management (Pinia)
-
-### `menuStore`
-
-- Menyimpan daftar menu dan kategori
-- Getter: `menuByKategori`, `kategoriList`
-
-### `mejaStore`
-
-- Menyimpan daftar meja dan status ketersediaannya
-- Getter: `filterMeja`
-- Aksi: `tandaiTidakTersedia(id)`, `tandaiTersedia(id)`
-- Menggunakan `localStorage` untuk persistensi
-
-### `transaksiStore`
-
-- Menyimpan daftar pesanan dan transaksi
-- Getter: `totalPesanan`
-- Aksi: `tambahPesanan`, `kurangiPesanan`, `hapusPesanan`, `simpanTransaksi`, `fetchTransaksi`, `tandaiSelesai`
+| `/boarding-list`   | Daftar Penitipan       | Daftar hewan yang dititipkan |
+| `/pickup-list`   | Daftar Pengambilan      | Daftar hewan yang telah diambil |
+| `/laporan`   | Laporan        | Konten Dummy |
 
 ---
 
 ## 🌐 API Endpoints (JSON Server)
 
-| Method | Endpoint                 | Deskripsi                          | Body / Params                                             |
-|--------|--------------------------|------------------------------------|-----------------------------------------------------------|
-| GET    | `/transaksi`             | Mengambil semua transaksi          | -                                                         |
-| POST   | `/transaksi`             | Menyimpan transaksi baru           | `{ id, tanggal, pesanan[], mejaId, selesai }`             |
-| PUT    | `/transaksi/:id`         | Memperbarui status transaksi       | `{ ...transaksi, selesai: true }`                         |
+| Method | Endpoint                 | Deskripsi                          | 
+|--------|--------------------------|------------------------------------|
+| GET    | `/pets`             | Mengambil semua data        |
+| POST   | `/pets`             | Menyimpan data         |
+| PUT    | `/pets/:id`         | Memperbarui status       | 
+| DELETE   | `/pets/:id`         | Menghapus data   | 
 
