@@ -7,6 +7,7 @@
         <thead>
           <tr>
             <th>No</th>
+             <th>ID</th>
             <th>Nama Pemilik</th>
             <th>Nama Hewan</th>
             <th>Jenis Hewan</th>
@@ -19,13 +20,16 @@
         <tbody>
           <tr v-for="(item, index) in boardings" :key="item.id">
             <td>{{ index + 1 }}</td>
+             <td>{{ item.boardingId }}</td>
             <td>{{ item.ownerName }}</td>
             <td>{{ item.petName }}</td>
             <td>{{ item.petType }} ({{ item.petBreed }})</td>
             <td>{{ formatDate(item.boardingDate) }}</td>
             <td>{{ item.duration }}</td>
             <td>
-              <span class="status-badge" :class="item.status">{{ getStatusText(item.status) }}</span>
+              <span :class="`status-${item.status}`">
+            {{ item.status === 'active' ? 'Aktif' : 'Selesai' }}
+          </span>
             </td>
             <td class="action-buttons">
               <router-link 
@@ -55,6 +59,11 @@ import { ref, onMounted } from 'vue'
 import { usePetShopStore } from '@/stores/petshop'
 
 export default {
+  computed: {
+    activeBoardings() {
+      return this.store.boardings.filter(b => b.status === 'active')
+    }
+  },
   setup() {
     const store = usePetShopStore()
     const boardings = ref([])
@@ -100,6 +109,10 @@ export default {
 </script>
 
 <style scoped>
+
+.status-active { color: green; }
+.status-completed { color: red; text-decoration: line-through; }
+
 .boarding-list {
   padding: 20px;
   margin-top: 60px;

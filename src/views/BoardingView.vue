@@ -86,6 +86,16 @@
             placeholder="Masukkan catatan khusus tentang hewan"
           ></textarea>
         </div>
+
+      <div class="form-group">
+  <label>ID Penitipan</label>
+  <input 
+    :value="form.boardingId" 
+    readonly
+    class="readonly-field"
+  >
+  <small>ID ini akan digunakan untuk pengambilan hewan</small>
+</div>
         
         <button type="submit" class="submit-btn">Simpan Penitipan</button>
       </form>
@@ -104,10 +114,18 @@ export default {
     const router = useRouter()
     const pets = ref([])
     const breeds = ref([])
+
+   const generateBoardingId = () => {
+  const date = new Date()
+  return `PS-${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${Math.floor(100+Math.random()*900)}`
+  // Contoh hasil: PS-202507123
+}
+
     
     const form = ref({
       ownerName: '',
       petType: '',
+      boardingId: generateBoardingId(), 
       petBreed: '',
       petName: '',
       boardingDate: '',
@@ -124,6 +142,7 @@ export default {
     const submitForm = async () => {
       try {
         const boardingData = {
+          boardingId: generateBoardingId(),
           ...form.value,
           status: 'active',
           createdAt: new Date().toISOString()
@@ -159,6 +178,12 @@ export default {
 </script>
 
 <style scoped>
+
+.readonly-id {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
 .boarding {
   padding: 20px;
   margin-top: 60px;

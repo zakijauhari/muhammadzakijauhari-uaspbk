@@ -42,22 +42,33 @@ export const usePetShopStore = defineStore('petshop', {
       }
     },
     async addPickup(pickupData) {
-      try {
-        const response = await axios.post('http://localhost:3000/pickups', {
-          ...pickupData,
-          status: 'completed',
-          createdAt: new Date().toISOString()
-        });
+  try {
+    // 1. Hapus data penitipan sesuai ID
+    const boardingToDelete = this.boardings.find(b => b.boardingId === pickupData.boardingId);
+    if (!boardingToDelete) throw new Error('Data penitipan tidak ditemukan');
 
-        this.pickups.push(response.data);
-        await this.updateStats('pickup', 1); // Tambah statistik
+    await axios.delete(`http://localhost:3000/boardings/${boardingToDelete.id}`);
 
-        return response.data;
-      } catch (error) {
-        this.error = error.message;
-        throw error;
-      }
-    },
+    // 2. Tambah data pengambilan
+    const response = await axios.post('http://localhost:3000/pickups', {
+      ...pickupData,
+      createdAt: new Date().toISOString()
+    });
+
+    // 3. Update state lokal
+    this.boardings = this.boardings.filter(b => b.id !== boardingToDelete.id);
+    this.pickups.push(response.data);
+
+    // 4. Update statistik
+    await this.updateStats('boarding', -1); // Kurangi total penitipan
+    await this.updateStats('pickup', 1);    // Tambah total pengambilan
+
+    return response.data;
+  } catch (error) {
+    this.error = error.message;
+    throw error;
+  }
+},
     async updateStats(type) {
       try {
         const currentStats = { ...this.stats }

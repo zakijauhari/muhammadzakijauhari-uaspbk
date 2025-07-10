@@ -20,15 +20,6 @@
           <p>Total Pengambilan</p>
         </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background: #bbdefb;">
-          <i class="fas fa-dog"></i>
-        </div>
-        <div class="stat-info">
-          <h3>{{ stats.available_pets || 0 }}</h3>
-          <p>Jenis Hewan Tersedia</p>
-        </div>
-      </div>
     </div>
 
     <div class="recent-activity">
@@ -112,16 +103,7 @@ h1 {
   font-size: 1.2rem;
 }
 
-.stat-info h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #4e342e;
-}
 
-.stat-info p {
-  margin: 5px 0 0;
-  color: #6d4c41;
-}
 
 .recent-activity {
   background: white;
