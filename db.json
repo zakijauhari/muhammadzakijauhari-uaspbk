@@ -1,0 +1,73 @@
+{
+  "boardings": [
+    {
+      "id": "2eb4",
+      "boardingId": "PS-001",
+      "ownerName": "Zaki Jauhari",
+      "petType": "Kucing",
+      "petBreed": "Persian",
+      "petName": "Vio",
+      "boardingDate": "2025-07-10",
+      "duration": 1,
+      "notes": "asd",
+      "status": "active",
+      "createdAt": "2025-07-10T08:34:04.238Z"
+    }
+  ],
+  "pickups": [
+    {
+      "id": "a881",
+      "ownerName": "Zaki Jauhari",
+      "petName": "Rocky",
+      "pickupDate": "2025-07-10",
+      "boardingId": "24141241",
+      "notes": "SD",
+      "status": "completed",
+      "createdAt": "2025-07-10T08:44:25.622Z"
+    }
+  ],
+  "pets": [
+    {
+      "id": "1",
+      "name": "Anjing",
+      "breeds": [
+        "Golden Retriever",
+        "Bulldog",
+        "Poodle",
+        "Chihuahua",
+        "Alaskan Malamute",
+        "Shih Tzu",
+        "German Shepherd",
+        "Beagle"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Kucing",
+      "breeds": [
+        "Persian",
+        "Maine Coon",
+        "Siamese",
+        "Ragdoll",
+        "British Shorthair",
+        "Scottish Fold",
+        "Sphynx",
+        "Bengal"
+      ]
+    }
+  ],
+  "stats": {
+    "item": {
+      "item": {
+        "total_boarding": 0,
+        "total_pickup": 0,
+        "available_pets": 3
+      },
+      "total_boarding": 1,
+      "total_pickup": 0,
+      "available_pets": 3
+    },
+    "total_boarding": 1,
+    "total_pickup": 1
+  }
+}
