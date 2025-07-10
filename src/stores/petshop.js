@@ -35,6 +35,9 @@ export const usePetShopStore = defineStore('petshop', {
         const response = await axios.post('http://localhost:3000/boardings', boardingData)
         this.boardings.push(response.data)
         await this.updateStats('boarding')
+        await this.addActivity({
+       type: 'boarding',
+       message: `Penitipan baru untuk ${boardingData.petName} (${boardingData.petBreed})`});
         return response.data
       } catch (error) {
         this.error = error.message
@@ -62,6 +65,9 @@ export const usePetShopStore = defineStore('petshop', {
     // 4. Update statistik
     await this.updateStats('boarding', -1); // Kurangi total penitipan
     await this.updateStats('pickup', 1);    // Tambah total pengambilan
+    await this.addActivity({
+     type: 'pickup',
+     message: `Pengambilan ${pickupData.petName} (ID: ${pickupData.boardingId})`});
 
     return response.data;
   } catch (error) {
@@ -213,7 +219,31 @@ export const usePetShopStore = defineStore('petshop', {
       return this.boardings.some(
         b => b.boardingId === boardingId && b.status === 'active'
       )
-    }
+    },
+    async addActivity(activity) {
+  try {
+    const response = await axios.post('http://localhost:3000/activities', {
+      ...activity,
+      timestamp: new Date().toISOString()
+    });
+    this.activities.unshift(response.data); // Tambah di awal array
+    return response.data;
+  } catch (error) {
+    this.error = error.message;
+    throw error;
+  }
+},
+
+async fetchActivities(limit = 3) {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/activities?_sort=timestamp&_order=desc&_limit=${limit}`
+    );
+    this.activities = response.data;
+  } catch (error) {
+    this.error = error.message;
+  }
+}
 
   }
 })

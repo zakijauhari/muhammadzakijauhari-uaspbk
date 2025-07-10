@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="logo">
       <img src="@/assets/logo.png" alt="PetShop Logo" class="logo-img">
-      <h2>PetShop Manager</h2>
+      <h2>Tempat Teduh</h2>
     </div>
     <ul class="menu">
       <li>

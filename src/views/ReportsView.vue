@@ -1,6 +1,6 @@
 <template>
   <div class="reports">
-    <h1>Laporan PetShop</h1>
+    <h1>Laporan</h1>
     
     <div class="reports-container">
       <div class="report-card">

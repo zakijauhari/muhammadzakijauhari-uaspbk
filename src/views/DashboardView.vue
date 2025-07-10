@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1>Dashboard PetShop</h1>
+    <h1>Dashboard</h1>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon" style="background: #ffcdd2;">
@@ -21,29 +21,17 @@
         </div>
       </div>
     </div>
-
-    <div class="recent-activity">
-      <h2>Aktivitas Terakhir</h2>
-      <div class="activity-list">
-        <div class="activity-item" v-for="(item, index) in recentActivities" :key="index">
-          <div class="activity-icon">
-            <i :class="item.icon"></i>
-          </div>
-          <div class="activity-details">
-            <p>{{ item.message }}</p>
-            <small>{{ item.time }}</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    <RecentActivities />
   </div>
 </template>
 
 <script>
+import RecentActivities from '@/components/RecentActivities.vue'
 import { ref, onMounted } from 'vue'
 import { usePetShopStore } from '@/stores/petshop'
 
 export default {
+  components: { RecentActivities },
   setup() {
     const store = usePetShopStore()
     const recentActivities = ref([
@@ -54,6 +42,9 @@ export default {
 
     onMounted(async () => {
       await store.fetchStats()
+    })
+     onMounted(async () => {
+      await store.fetchActivities()
     })
 
     return {

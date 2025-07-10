@@ -1,6 +1,9 @@
 {
   "boardings": [],
   "pickups": [],
+  "activities": [
+
+  ],
   "pets": [
     {
       "id": "1",
